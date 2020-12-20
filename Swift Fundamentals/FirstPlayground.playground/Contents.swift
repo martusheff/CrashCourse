@@ -181,3 +181,152 @@ func difference(between firstAmount: Int, and secondAmount: Int) -> Int {
 }
 let resultV2 = difference(between: 27391, and: 7863)
 print("The difference is: \(resultV2).")
+
+// Enumerations
+
+enum MediaType {
+    case book, movie, music, magazine
+}
+var itemType: MediaType
+itemType = .movie
+
+// later
+itemType = .music
+
+// Use in Switch Statement
+var itemTitle = "Middlemarch"
+switch itemType {
+case .book:
+    print("I've been reading \(itemTitle)")
+case .music:
+    print("I've been listening to \(itemTitle)")
+case .movie:
+    print("I've been watching \(itemTitle)")
+case .magazine:
+    print("I've recently subscribed to \(itemTitle)")
+}
+
+// Enumerations: Raw Values
+
+enum BottleSize: String {
+    case half = "28.5 cl"
+    case standard = "75 cl"
+    case magnum = "1.5 litres"
+    case jeroboam = "3 litres"
+}
+
+var myBottle: BottleSize = .jeroboam
+print("Your \(myBottle) is \(myBottle.rawValue).")
+
+enum Intensity{
+    case light, moderate, hard
+}
+enum Workout { // Got ahead of myself. In this case, create a struct. Intensity is a better use case.
+    case feeling(String)
+    case intensity(String)
+    case distance(Double)
+    case duration(Int)
+}
+
+var newEntry: Workout = .duration(98)
+
+switch newEntry {
+case .feeling(let experience):
+    print("I am feeling \(experience).")
+case .intensity(let level):
+    print("I put in a \(level) workout.")
+case .distance(let miles):
+    print("I ran \(miles) miles.")
+case .duration(let minutes):
+    print("Total length of workout was \(minutes / 60) hour(s) and \(minutes % 60) minute(s).")
+}
+
+
+// Structs
+struct Movie {
+    // properties
+    var title: String
+    var director: String
+    var releaseYear: Int
+    var genre: String
+    
+    func summary() -> String{
+        return "\(title) is a \(genre) film released in \(releaseYear) and directed by \(director)."
+    }
+}
+
+var first = Movie(title: "Waterboy", director: "Director Directorson", releaseYear: 1990, genre: "Funny")
+var second = Movie(title: "Big Daddy", director: "Not Adam Sandler", releaseYear: 1990 , genre: "Also funny")
+
+print(first.title)
+print(second.genre)
+
+second.releaseYear = 1991
+print(first.summary())
+print(second.summary())
+
+
+// Dictionaries
+
+var airlines = ["SWA": "Southwest Airlines",
+                "BAW": "British Airways",
+                "BHA": "Buddha Air" ]
+
+if let resultV3 = airlines["SWA"] {
+    print(resultV3)
+} else {
+    print("No match found")
+}
+
+// add or change
+airlines["DVA"] = "Discovery Airlines"
+
+// remove by setting to nil
+airlines["BHA"] = nil
+
+// Dictionary of String keys and String values
+var periodicElements: [String: String]
+
+// Dictionary of Int keys and String Values
+var employees: [Int:String]
+
+for (code, airline) in airlines {
+    print(airline)
+    print(code)
+}
+
+// Tuple example
+
+let cameraType = "Canon"
+let photoMode = true
+var shutterSpeed = 60
+var iso = 640
+var aperture = "f1.4"
+
+var basicTuple = (aperture, iso, cameraType)
+
+print(basicTuple)
+
+// can mix literals, constants, variables
+var nextTuple = ("String literal!", photoMode, 32342, cameraType)
+
+// Returning a tuple from a function
+
+func randomAlbum() -> (albumtitle: String, length: Int) {
+    let title = "And in the endless pause there came the sound of bees."
+    let duration = 3432
+    
+    return (title, duration)
+}
+
+let resultV3 = randomAlbum()
+print(resultV3)
+
+// best use case
+let (nextTitle, length) = randomAlbum()
+print("Playing next: \(nextTitle) (\(length/60)m\(length % 60)s)")
+
+// Dictionaries with Tuples
+for (x,y) in airlines {
+    print("The key is \(x) and the value is \(y).")
+}
