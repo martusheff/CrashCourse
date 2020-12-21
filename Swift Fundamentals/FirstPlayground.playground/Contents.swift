@@ -333,7 +333,7 @@ for (x,y) in airlines {
 
 
 // Closures
-struct Book {
+struct Book { // Struct of Book
     var title: String
     var authorLastName: String
     var authorFirstName: String
@@ -341,28 +341,26 @@ struct Book {
     var pageCount: Int
 }
 
+// 5 Books
 let book1 = Book.init(title: "Where the wild things are", authorLastName: "Sendak", authorFirstName: "Maurice", readingAge: 4, pageCount: 48)
 let book2 = Book.init(title: "The little Prince", authorLastName: "de Saint-EWxupery", authorFirstName: "Antoine", readingAge: 10, pageCount: 96)
 let book3 = Book.init(title: "Oh the Places You'll go", authorLastName: "Seus", authorFirstName: "Dr.", readingAge: 19, pageCount: 56)
 let book4 = Book.init(title: "Goodnight moon", authorLastName: "Wise Brown", authorFirstName: "Margeret", readingAge: 1, pageCount: 30)
 let book5 = Book.init(title: "The Hobbit", authorLastName: "Tolkien", authorFirstName: "J.R.R.", readingAge: 12, pageCount: 300)
 
-let allBooks = [book1, book2, book3, book4, book5]
+let allBooks = [book1, book2, book3, book4, book5] //  Array of Books
 
-let ageSortedBooks = allBooks.sorted { $0.readingAge <= $1.readingAge }
+let ageSortedBooks = allBooks.sorted { $0.readingAge <= $1.readingAge } // Copies array into sorted result.
 
-let shortestToLongest = allBooks.sorted { $0.pageCount <= $1.pageCount }
-ageSortedBooks
-shortestToLongest
+let shortestToLongest = allBooks.sorted { $0.pageCount <= $1.pageCount } // Sorts by pageCount.
 
-let booksForUnder10s = allBooks.filter { $0.readingAge < 10}
-booksForUnder10s
+let booksForUnder10s = allBooks.filter { $0.readingAge < 10} // Sorts for reading Ages under 10
 
-let sortedByPageForUnder10 = booksForUnder10s.sorted { $0.readingAge < $1.readingAge }
-sortedByPageForUnder10
+let sortedByPageForUnder10 = booksForUnder10s.sorted { $0.readingAge < $1.readingAge } // Sorted by length for ages under 10.
 
 
 // Classes
+
 class Appliance {
     // properties
     var manufacturer: String = ""
@@ -382,7 +380,6 @@ class Appliance {
 
 
 // ... later, create instance
-
 var kettle = Appliance()
 kettle.manufacturer = "Megapliance, Inc"
 kettle.model = "TeaMaster 5000"
@@ -390,7 +387,6 @@ kettle.voltage = 120
 print(kettle.getDetails())
 
 // Initialization
-
 class ApplianceV2 {
     // properties
     var manufacturer: String
@@ -433,9 +429,7 @@ struct ApplianceV3 {
 
 var toaster = ApplianceV3(manufacturer: "LG", model: "Toast Buddy 700")
 
-
 // Value vs. Reference
-
 // a Swift string is a struct - a value type
 var firstString = "This is some text..."
 
@@ -472,7 +466,6 @@ if firstMessage === secondMessage {
 
 
 // Inheritance
-
 class ApplianceV4 {
     var make: String
     var model: String
@@ -490,7 +483,7 @@ class Toaster: ApplianceV4 {
     // new property
     var slices: Int
     
-    override init() {
+    override init() { // overrides super inheritance
         self.slices = 2
         super.init()
     }
@@ -500,8 +493,8 @@ class Toaster: ApplianceV4 {
     }
 }
 
+// Toaster inherits Class ApplianceV4, and assumes its attribiutes/funcs.
 var myToaster = Toaster()
-
 myToaster.make = "ArmeCorp"
 myToaster.model = "Carbonizer"
 myToaster.printDetails()
@@ -509,27 +502,25 @@ myToaster.toast()
 
 
 // Extensions
-
 let newAlbum = "Deck and drums and rock and roll"
 let scriptio = "Neque porro quisquam est qui dolorem opsum..."
 let phrase = "Love is now here"
 
 newAlbum.uppercased()
 
+// Creating an extension of String "Remove Spaces"
 extension String {
     func removeSpaces() -> String {
         let filteredCharacters = self.filter{ $0 != " "}
         return String(filteredCharacters)
     }
 }
-
 print(newAlbum.removeSpaces())
 
 
 
 
 // Stored Properties
-
 class MyClass {
     //properties
     let name: String = ""
@@ -574,7 +565,6 @@ class Player: CustomStringConvertible {
 let newPlayer = Player(name: "Ava")
 
 // as the game progresses, values change...
-
 newPlayer.enemiesDestroyed = 326
 newPlayer.penalty = 872
 newPlayer.bonus = 25000
@@ -584,7 +574,6 @@ newPlayer.score = 10333
 
 
 // Protocols - A set of rules or a code of behavior.
-
 let p1 = Player(name: "Ava")
 let p2 = Player(name: "Mason")
 p1.enemiesDestroyed = 326
@@ -593,7 +582,6 @@ p1.bonus = 25000
 p2.enemiesDestroyed = 411
 p2.penalty = 8722
 p2.bonus = 20000
-
 print(p1)
 print(p2)
 
@@ -604,14 +592,14 @@ protocol MyProtocol {
     
     var name: String { get }
 }
-
 struct MyStruct: MyProtocol {
     func showMessage() {
         print("Now conforming...")
     }
     var name = "Andron"
-    
+
 }
+
 
 // Error Handling
 
@@ -641,7 +629,6 @@ func checkStatus(serverNumber: Int) throws -> String {
 }
 
 // Handle
-
 do {
     let resultV4 = try checkStatus(serverNumber: 1)
     print(resultV4)
@@ -667,7 +654,6 @@ if resultV5 != nil {
 
 let resultV6 = try? checkStatus(serverNumber: 3)
 
-
 if let resultV7 = try? checkStatus(serverNumber: 1) {
     print(resultV7)
 }
@@ -688,7 +674,6 @@ processTrack(trackName: "Blood on My Jeans", artist: "Juice WRLD", duration: 155
 
 // Defer - Defers code execution to right before leaving the scope.
 // Ex Use Case
-
 class ShoppingCart {
     var numItems: Int = 0
     
@@ -717,7 +702,6 @@ func addToCart(myCart: ShoppingCart) {
     }
     myCart.numItems += 1
     myCart.totalItems()
-    
 }
 
 addToCart(myCart: myCart)
