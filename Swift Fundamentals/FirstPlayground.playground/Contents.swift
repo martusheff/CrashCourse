@@ -330,3 +330,394 @@ print("Playing next: \(nextTitle) (\(length/60)m\(length % 60)s)")
 for (x,y) in airlines {
     print("The key is \(x) and the value is \(y).")
 }
+
+
+// Closures
+struct Book {
+    var title: String
+    var authorLastName: String
+    var authorFirstName: String
+    var readingAge: Int
+    var pageCount: Int
+}
+
+let book1 = Book.init(title: "Where the wild things are", authorLastName: "Sendak", authorFirstName: "Maurice", readingAge: 4, pageCount: 48)
+let book2 = Book.init(title: "The little Prince", authorLastName: "de Saint-EWxupery", authorFirstName: "Antoine", readingAge: 10, pageCount: 96)
+let book3 = Book.init(title: "Oh the Places You'll go", authorLastName: "Seus", authorFirstName: "Dr.", readingAge: 19, pageCount: 56)
+let book4 = Book.init(title: "Goodnight moon", authorLastName: "Wise Brown", authorFirstName: "Margeret", readingAge: 1, pageCount: 30)
+let book5 = Book.init(title: "The Hobbit", authorLastName: "Tolkien", authorFirstName: "J.R.R.", readingAge: 12, pageCount: 300)
+
+let allBooks = [book1, book2, book3, book4, book5]
+
+let ageSortedBooks = allBooks.sorted { $0.readingAge <= $1.readingAge }
+
+let shortestToLongest = allBooks.sorted { $0.pageCount <= $1.pageCount }
+ageSortedBooks
+shortestToLongest
+
+let booksForUnder10s = allBooks.filter { $0.readingAge < 10}
+booksForUnder10s
+
+let sortedByPageForUnder10 = booksForUnder10s.sorted { $0.readingAge < $1.readingAge }
+sortedByPageForUnder10
+
+
+// Classes
+class Appliance {
+    // properties
+    var manufacturer: String = ""
+    var model: String = ""
+    var voltage: Int = 0
+    var capacity: Int?
+    
+    //methods
+    func getDetails() -> String {
+        var message = "This is the \(self.model) from \(self.manufacturer)."
+        if self.voltage >= 220 {
+            message += "This model is for European usage."
+        }
+        return message
+    }
+}
+
+
+// ... later, create instance
+
+var kettle = Appliance()
+kettle.manufacturer = "Megapliance, Inc"
+kettle.model = "TeaMaster 5000"
+kettle.voltage = 120
+print(kettle.getDetails())
+
+// Initialization
+
+class ApplianceV2 {
+    // properties
+    var manufacturer: String
+    var model: String
+    var voltage: Int
+    var capacity: Int?
+    
+    // initializer
+    init() {
+        self.manufacturer = "default manufac."
+        self.model = "default model"
+        self.voltage = 120
+    }
+    
+    // deinitializer
+    deinit {
+        //perform cleanup code here...
+        // release a file resource
+        // release a network resource
+    }
+    
+    // additional initializer
+    
+    init(withVoltage: Int) {
+        self.manufacturer = "defualt manufact."
+        self.model = "default model"
+        self.voltage = withVoltage
+    }
+}
+
+var cafetiere = ApplianceV2(withVoltage: 5)
+
+
+// Structs & Classes
+struct ApplianceV3 {
+    // properties
+    var manufacturer: String
+    var model: String
+}
+
+var toaster = ApplianceV3(manufacturer: "LG", model: "Toast Buddy 700")
+
+
+// Value vs. Reference
+
+// a Swift string is a struct - a value type
+var firstString = "This is some text..."
+
+// if I assign, it's a copy...
+var secondString = firstString
+
+// so a change to the second string...
+secondString += " with some added text."
+print(secondString)
+
+// does not affect the other
+print(firstString)
+
+class Message {
+    var internalText: String = "This is some internal text..."
+}
+
+// creates new instance
+var firstMessage = Message()
+
+// if I assign, it's a reference to the original instance
+var secondMessage = firstMessage
+
+secondMessage.internalText += " with some additional text."
+
+//print both. same reference.
+print(firstMessage.internalText)
+print(secondMessage.internalText)
+
+/// are they the same thing?
+if firstMessage === secondMessage {
+    print("Yes - they are references to the same instance.")
+}
+
+
+// Inheritance
+
+class ApplianceV4 {
+    var make: String
+    var model: String
+    init() {
+        self.make = "default"
+        self.model = "default"
+    }
+    final func printDetails() {
+        print("Make: \(self.make) \nModel: \(self.model)")
+    }
+}
+
+// define new class
+class Toaster: ApplianceV4 {
+    // new property
+    var slices: Int
+    
+    override init() {
+        self.slices = 2
+        super.init()
+    }
+    //new method
+    func toast() {
+        print("Irradiating now...")
+    }
+}
+
+var myToaster = Toaster()
+
+myToaster.make = "ArmeCorp"
+myToaster.model = "Carbonizer"
+myToaster.printDetails()
+myToaster.toast()
+
+
+// Extensions
+
+let newAlbum = "Deck and drums and rock and roll"
+let scriptio = "Neque porro quisquam est qui dolorem opsum..."
+let phrase = "Love is now here"
+
+newAlbum.uppercased()
+
+extension String {
+    func removeSpaces() -> String {
+        let filteredCharacters = self.filter{ $0 != " "}
+        return String(filteredCharacters)
+    }
+}
+
+print(newAlbum.removeSpaces())
+
+
+
+
+// Stored Properties
+
+class MyClass {
+    //properties
+    let name: String = ""
+    var width: Int = 0
+    var height: Int = 0
+}
+
+// Adding Computed Properties
+class Player: CustomStringConvertible {
+    //stored properties
+    var name: String
+    var livesRemaining: Int
+    var enemiesDestroyed: Int
+    var penalty: Int
+    var bonus: Int
+    
+    var description: String {
+        return "Player \(self.name) has a score of \(self.score) and \(self.livesRemaining) lives remaining."
+    }
+    
+    // computed property
+    var score: Int{
+        get { // with read only, only include return statement
+           return(enemiesDestroyed * 1000) + bonus + (livesRemaining * 5000) - penalty
+        }
+        set {
+            print("You passed in \(newValue) but I'm going to ignore it.")
+        }
+    }
+    
+    init(name: String) {
+        self.name = name
+        self.livesRemaining = 3
+        self.enemiesDestroyed = 0
+        self.penalty = 0
+        self.bonus = 0
+    }
+}
+
+
+// Create player.
+let newPlayer = Player(name: "Ava")
+
+// as the game progresses, values change...
+
+newPlayer.enemiesDestroyed = 326
+newPlayer.penalty = 872
+newPlayer.bonus = 25000
+
+print("The final score is: \(newPlayer.score).")
+newPlayer.score = 10333
+
+
+// Protocols - A set of rules or a code of behavior.
+
+let p1 = Player(name: "Ava")
+let p2 = Player(name: "Mason")
+p1.enemiesDestroyed = 326
+p1.penalty = 872
+p1.bonus = 25000
+p2.enemiesDestroyed = 411
+p2.penalty = 8722
+p2.bonus = 20000
+
+print(p1)
+print(p2)
+
+// Define a protocol
+protocol MyProtocol {
+    // what methods are required?
+    func showMessage()
+    
+    var name: String { get }
+}
+
+struct MyStruct: MyProtocol {
+    func showMessage() {
+        print("Now conforming...")
+    }
+    var name = "Andron"
+    
+}
+
+// Error Handling
+
+// Define
+enum ServerError: Error {
+    case noConnection
+    case servernotFound
+    case authenticationRefused
+}
+
+// Use
+func checkStatus(serverNumber: Int) throws -> String {
+    switch serverNumber {
+    case 1:
+        print("You have no connection.")
+        throw ServerError.noConnection
+    case 2:
+        print("Authentication failed.")
+        throw ServerError.authenticationRefused
+    case 3:
+        print("Server 3 is up and running!")
+    default:
+        print("Can't find the server.")
+        throw ServerError.servernotFound
+    }
+    return "Success!"
+}
+
+// Handle
+
+do {
+    let resultV4 = try checkStatus(serverNumber: 1)
+    print(resultV4)
+} catch ServerError.noConnection {
+    print("No connection, please try later.")
+} catch ServerError.authenticationRefused {
+    print("Authentication error. Please check your username and password.")
+} catch {
+    print("The problem is: \(error)")
+}
+
+// Alternatively, if you do not care about the value...
+let resultV5: String?
+do {
+    resultV5 = try checkStatus(serverNumber: 3)
+} catch {
+    resultV5 = nil
+}
+
+if resultV5 != nil {
+    print(resultV5!)
+}
+
+let resultV6 = try? checkStatus(serverNumber: 3)
+
+
+if let resultV7 = try? checkStatus(serverNumber: 1) {
+    print(resultV7)
+}
+
+// Guard and Defer - Control Flow
+
+// Guard
+func processTrack(trackName: String?, artist: String?, duration: Int?) {
+    // check for values
+    guard let unwrappedTrack = trackName,
+          let unwrappedArtist = artist,
+          let unwrappedDuration = duration else { return }
+    // now start processing
+    print("\(unwrappedTrack) by \(unwrappedArtist) - \(unwrappedDuration / 60):\(unwrappedDuration % 60)")
+}
+
+processTrack(trackName: "Blood on My Jeans", artist: "Juice WRLD", duration: 155)
+
+// Defer - Defers code execution to right before leaving the scope.
+// Ex Use Case
+
+class ShoppingCart {
+    var numItems: Int = 0
+    
+    init() {
+    
+    }
+    func open() {
+        print("Your cart is now open.")
+    }
+    func upsellMessage() {
+        print("Save 10& when you spend $149 or more!")
+    }
+    func close() {
+        print("Your cart is now closed.")
+    }
+    func totalItems() {
+        print("You have \(self.numItems) item(s) in your cart.")
+    }
+}
+var myCart = ShoppingCart()
+
+func addToCart(myCart: ShoppingCart) {
+    myCart.open()
+    defer {
+        myCart.close()
+    }
+    myCart.numItems += 1
+    myCart.totalItems()
+    
+}
+
+addToCart(myCart: myCart)
