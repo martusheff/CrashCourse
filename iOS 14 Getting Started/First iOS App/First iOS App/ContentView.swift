@@ -11,9 +11,18 @@ var str = ""
 
 struct ContentView: View {
     var body: some View {
-        EmptyView()
+        VStack{
+            /*@START_MENU_TOKEN@*/Text("Placeholder")/*@END_MENU_TOKEN@*/
+            Spacer()
+        }
+
+
+                
+                
+                
+        }
     }
-}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
