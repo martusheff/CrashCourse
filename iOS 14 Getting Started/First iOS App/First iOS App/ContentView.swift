@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct ContentView: View {
+
     var body: some View {
         TabView {
             HomeView().tabItem {
@@ -35,8 +36,16 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct HomeView: View {
+    @State private var theTask = Task(name: "Check all Windows", isComplete: false, lastCompleted: nil)
     var body: some View {
-        Text("TODO: BUILD HOME SCREEN")
+        VStack {
+            HStack {
+                Image(systemName: theTask.isComplete ?
+                    "checkmark.square" :"square")
+                Text(theTask.name)
+            }
+            ControlPanel(theTask: self.$theTask)
+        }
     }
 }
 
@@ -51,3 +60,23 @@ struct SettingsView: View {
         Text("SETTINGS")
     }
 }
+
+struct ControlPanel: View {
+    @Binding var theTask: Task
+    var body: some View {
+        if theTask.isComplete == false {
+            Button(action: {
+                theTask.isComplete = true
+            }) {
+                Text("Check")
+            }.padding(.top)
+        } else {
+            Button(action: {
+                theTask.isComplete = false
+            }) {
+                Text("Uncheck")
+            }.padding(.top)
+        }
+    }
+    }
+
