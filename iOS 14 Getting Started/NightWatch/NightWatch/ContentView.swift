@@ -7,99 +7,76 @@
 
 import SwiftUI
 
+let nightlyTasks = [
+    "Check all windows",
+    "Check all doors",
+    "Check that the safe is locked",
+    "Check the mailbox",
+    "Inspect security cameras",
+    "Clear ice from sidewalks",
+    "Document \"strange and unusual\" occurences"
+]
+
+let weeklyTasks = [
+    "Check inside all vacant rooms",
+    "Walk the perimeter of the property"
+]
+
+let monthlyTasks = [
+    "Test security alarm",
+    "Test motion detectors",
+    "Test smoke alarms"
+]
+
 struct ContentView: View {
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
+        
+        NavigationView {
+            List {
+                Section(header: TaskSectionHeader(symbolSystemName: "moon.stars", headerText: "Nightly Tasks")) {
+                    ForEach(nightlyTasks, id: \.self, content: {
+                        taskName in
+                        NavigationLink(taskName,
+                                       destination: DetailsView(taskName: taskName))
+                    })
+                }
                 
-                
-                // MARK: NIGHTLY TASKS
-                Group {
-                    HStack {
-                        Text(Image(systemName: "moon.stars"))
-                            .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.heavy)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.yellow/*@END_MENU_TOKEN@*/)
-                            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-                        Text("Nightly Tasks")
-                            
-                            .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.heavy)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.yellow/*@END_MENU_TOKEN@*/)
-                            .underline()
-                            .textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
+                Section(header: TaskSectionHeader(symbolSystemName: "sunrise", headerText: "Weekly Tasks")) {
+                    ForEach(weeklyTasks, id: \.self, content: {
+                        taskName in
+                        NavigationLink(taskName, destination: Text(taskName))
+                    })
+                }
 
-                    }
-                    .padding(.bottom, 1.0)
-                        
-                    Text("- Check all windows.")
-                    Text("- Check all doors.")
-                    Text("- Check that the safe is locked.")
-                    Text("- Check the mailbox.")
-                    Text("- Inspect security cameras.")
+                Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks")) {
+                    ForEach(monthlyTasks, id: \.self, content: {
+                        taskName in
+                        NavigationLink(taskName, destination: Text(taskName))
+                    })
                 }
-                
-                // MARK: WEEKLY TASKS
-                Group {
-                    Divider()
-                        .padding(.bottom, 1.0)
-                    HStack {
-                        Text(Image(systemName: "sunset"))
-                            .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.heavy)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.yellow/*@END_MENU_TOKEN@*/)
-                            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-                        
-                        Text("Weekly Tasks")
-                            .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.heavy)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.yellow/*@END_MENU_TOKEN@*/)
-                            .underline()
-                            .textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
-                        
-                            
-                    }
-                    .padding(.bottom, 1.0)
-                    Text("- Check inside all vacant rooms.")
-                    Text("- Walk the perimeter of property.")
-                }
-                
-                // MARK: MONTHLY TASKS
-                Group {
-                    Divider()
-                        .padding(.bottom, 1.0)
-                    HStack {
-                        Text(Image(systemName: "calendar"))
-                            .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.heavy)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.yellow/*@END_MENU_TOKEN@*/)
-                            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-                        
-                        Text("Monthly Tasks")
-                            .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                            .fontWeight(.heavy)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.yellow/*@END_MENU_TOKEN@*/)
-                            .underline()
-                            .textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
-                    }
-                    .padding(.bottom, 1.0)
-                    Text("- Test security alarm.")
-                    Text("- Test motion detectors.")
-                    Text("- Test smoke alarms.")
-                }
-                
-                Spacer()
-                    
-            }
-            .foregroundColor(/*@START_MENU_TOKEN@*/.gray/*@END_MENU_TOKEN@*/)
-            Spacer()
+            }.listStyle(GroupedListStyle())
+            .listStyle(GroupedListStyle())
+            .navigationTitle("Home")
         }
-        .padding(.all)
     }
 }
+
+struct TaskSectionHeader: View {
+    let symbolSystemName: String
+    let headerText: String
+    var body: some View {
+        HStack {
+            Image(systemName: symbolSystemName)
+            Text(headerText)
+        }.font(.title3)
+    }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
+
