@@ -13,6 +13,7 @@
 		DF0834AA25919538003AACDB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF0834A925919538003AACDB /* Preview Assets.xcassets */; };
 		DF2915772592FE2800DEC033 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2915762592FE2800DEC033 /* DetailsView.swift */; };
 		DF29157A2593350C00DEC033 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2915792593350C00DEC033 /* Task.swift */; };
+		DF5148CC25944F5C004997AA /* NightWatchTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5148CB25944F5C004997AA /* NightWatchTasks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		DF0834AB25919538003AACDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF2915762592FE2800DEC033 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		DF2915792593350C00DEC033 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		DF5148CB25944F5C004997AA /* NightWatchTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightWatchTasks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +60,12 @@
 			children = (
 				DF0834A225919536003AACDB /* NightWatchApp.swift */,
 				DF0834A425919536003AACDB /* ContentView.swift */,
+				DF2915762592FE2800DEC033 /* DetailsView.swift */,
+				DF2915792593350C00DEC033 /* Task.swift */,
+				DF5148CB25944F5C004997AA /* NightWatchTasks.swift */,
 				DF0834A625919538003AACDB /* Assets.xcassets */,
 				DF0834AB25919538003AACDB /* Info.plist */,
 				DF0834A825919538003AACDB /* Preview Content */,
-				DF2915762592FE2800DEC033 /* DetailsView.swift */,
-				DF2915792593350C00DEC033 /* Task.swift */,
 			);
 			path = NightWatch;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				DF0834A525919536003AACDB /* ContentView.swift in Sources */,
 				DF0834A325919536003AACDB /* NightWatchApp.swift in Sources */,
 				DF2915772592FE2800DEC033 /* DetailsView.swift in Sources */,
+				DF5148CC25944F5C004997AA /* NightWatchTasks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
