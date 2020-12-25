@@ -175,7 +175,7 @@ struct ContentView_Previews: PreviewProvider {
         let nightWatchTasks = NightWatchTasks()
         Group {
             ContentView(nightWatchTasks: nightWatchTasks)
-                .preferredColorScheme(.dark)
+                
                 
         }
     }

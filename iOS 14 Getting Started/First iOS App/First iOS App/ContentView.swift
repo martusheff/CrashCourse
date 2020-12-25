@@ -15,15 +15,14 @@ struct ContentView: View {
         TabView {
             HomeView().tabItem {
                 Text("Map")
-                Image(systemName: "house")
+                Image(systemName: "calendar")
             }
             MapView().tabItem {
-                /*@START_MENU_TOKEN@*/Text("Tab Label 2")/*@END_MENU_TOKEN@*/
-                Image(systemName: "map")
+                Image(systemName: "house.fill")
             }
             SettingsView().tabItem {
                 Text("Settings")
-                Image(systemName: "gear")}
+                Image(systemName: "text.aligncenter")}
         }
     }
 }
