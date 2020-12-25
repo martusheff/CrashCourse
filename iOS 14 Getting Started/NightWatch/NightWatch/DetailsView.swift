@@ -9,10 +9,20 @@ import SwiftUI
 
 struct DetailsView: View {
     @Binding var task: Task
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    
     var body: some View {
         VStack {
+            Image("Floorplan")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
             Text(task.name)
-            Text("Placeholder task description text")
+            
+            if verticalSizeClass == .regular{
+                Divider()
+                Text("Placeholder task description text")
+            }
+
             Button("Mark Complete") { task.isComplete = true }
         }
     }

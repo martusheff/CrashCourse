@@ -144,6 +144,7 @@ struct TaskSectionHeader: View {
         HStack {
             Image(systemName: symbolSystemName)
             Text(headerText)
+                .foregroundColor(.accentColor)
         }.font(.title3)
     }
 }
@@ -174,8 +175,8 @@ struct ContentView_Previews: PreviewProvider {
         let nightWatchTasks = NightWatchTasks()
         Group {
             ContentView(nightWatchTasks: nightWatchTasks)
-            TaskRow(task: Task(name: "Test task.", isComplete: false, lastCompleted: nil))
-                .previewLayout(.fixed(width: 300, height: 70))
+                .preferredColorScheme(.dark)
+                
         }
     }
 }
