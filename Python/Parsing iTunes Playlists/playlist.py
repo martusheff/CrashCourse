@@ -34,7 +34,7 @@ def findCommonTracks(fileNames):
 		f = open("common.txt", "w")
 		for val in commonTracks:
 			s = "%s\n" % val
-			f.write(s) # FIX THIS <-------------------------------------------------- || FIX ||
+			f.write(s)
 		f.close()
 		print("%d common tracks found. "
 			"Track names written to common.txt." % len(commonTracks))
